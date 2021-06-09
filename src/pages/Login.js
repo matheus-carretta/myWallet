@@ -1,4 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Redirect } from 'react-router';
+import saveEmail from '../actions/userActions';
 
 class Login extends React.Component {
   constructor() {
@@ -8,11 +12,13 @@ class Login extends React.Component {
       password: '',
       emailVerified: false,
       passwordVerified: false,
+      isLogged: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.verifyEmail = this.verifyEmail.bind(this);
     this.verifyPassword = this.verifyPassword.bind(this);
+    this.loginClick = this.loginClick.bind(this);
   }
 
   handleChange(event) {
@@ -54,17 +60,31 @@ class Login extends React.Component {
     }
   }
 
+  loginClick() {
+    const { email } = this.state;
+    const { login } = this.props;
+    login(email);
+    this.setState((prevState) => ({
+      ...prevState,
+      isLogged: true,
+    }));
+  }
+
   render() {
-    const { email, password, emailVerified, passwordVerified } = this.state;
+    const { email, password, emailVerified, passwordVerified, isLogged } = this.state;
+    if (isLogged) {
+      return <Redirect to="/carteira" />;
+    }
     return (
       <form>
         <input
           type="email"
           data-testid="email-input"
-          placeholder="Digite seu email!"
+          placeholder="Digite seu email"
           name="email"
           value={ email }
           onChange={ this.handleChange }
+          autoComplete="off"
         />
         <input
           type="password"
@@ -77,6 +97,7 @@ class Login extends React.Component {
         <button
           type="button"
           disabled={ !(emailVerified && passwordVerified) }
+          onClick={ this.loginClick }
         >
           Entrar
         </button>
@@ -85,4 +106,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  login: (email) => dispatch(saveEmail(email)),
+});
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);

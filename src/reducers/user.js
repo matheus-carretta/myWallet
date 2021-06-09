@@ -2,19 +2,19 @@
 import SAVE_EMAIL from '../actions/index';
 
 const initialState = {
-  user: {
-    email: '',
-  },
+  email: '',
 };
 
-export default (state = initialState, { type, payload }) => {
+const user = (state = initialState, { type, payload }) => {
   switch (type) {
   case SAVE_EMAIL:
     return {
       ...state,
-      user: { email: payload },
+      email: payload,
     };
   default:
     return state;
   }
 };
+
+export default user;
