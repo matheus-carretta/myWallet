@@ -1,3 +1,3 @@
-const SAVE_EMAIL = 'SAVE_EMAIL';
-
-export default SAVE_EMAIL;
+export const SAVE_EMAIL = 'SAVE_EMAIL';
+export const START_LOADING = 'START_LOADING';
+export const FINISH_LOADING = 'FINISH_LOADING';
