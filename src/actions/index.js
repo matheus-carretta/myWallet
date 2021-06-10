@@ -1,3 +1,4 @@
 export const SAVE_EMAIL = 'SAVE_EMAIL';
 export const START_LOADING = 'START_LOADING';
 export const FINISH_LOADING = 'FINISH_LOADING';
+export const GET_CURRENCIES = 'GET_CURRENCIES';
