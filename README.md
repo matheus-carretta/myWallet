@@ -21,4 +21,4 @@ O projeto se trata de um carteira, onde você pode adicionar as despesas que vã
 
 Primeiro, clone o projeto em sua máquina com: git clone git@github.com:matheus-carretta/myWallet.git
 
-Depois use o comando npm start para executar em um servidor local
+Depois use o comando npm install e depois npm start para executar em um servidor local
